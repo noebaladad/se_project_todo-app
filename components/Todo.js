@@ -31,15 +31,15 @@ class Todo {
         this._todoDate = this._todoElement.querySelector(".todo__date");
         this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
         
-        todoNameEl.textContent = this._data.name;
-        todoDate.textContent = this._data.date;
+        this._todoNameEl.textContent = this._data.name;
+        this._todoDate.textContent = this._data.date;
 
         this._generateCheckboxEl();
         this._setEventListeners();
 
-        this._dueDate = new Date(data.date);
-        if (!isNaN(dueDate)) {
-          todoDate.textContent = `Due: ${dueDate.toLocaleString("en-US", {
+        this._dueDate = new Date(this._data.date);
+        if (!isNaN(this._dueDate)) {
+          this._todoDate.textContent = `Due: ${this._dueDate.toLocaleString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric",
