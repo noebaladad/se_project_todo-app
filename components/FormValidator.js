@@ -38,14 +38,12 @@ class FormValidator {
           });
         };
 
-    }
-
     enableValidation() {
         this._formEl.addEventListener("submit", (evt) => {
-          evt.preventDefault();
-        });
-        this._setEventListeners();
-    }
+            evt.preventDefault();
+          });
+          this._setEventListeners();
+    }     
 }
 
 export default FormValidator;
