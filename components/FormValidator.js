@@ -22,10 +22,10 @@ class FormValidator {
 
     _setEventListeners() {
         this._inputList = Array.from(
-            this._formEl.querySelectorAll(settings.this._inputSelector),
+            this._formEl.querySelectorAll(this._inputSelector),
           );
           const buttonElement = this._formEl.querySelector(
-            settings.submitButtonSelector,
+            this._submitButtonSelector,
           );
         
           toggleButtonState(inputList, buttonElement, settings);
