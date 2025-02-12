@@ -28,12 +28,12 @@ class FormValidator {
             this._submitButtonSelector,
           );
         
-          toggleButtonState(inputList, buttonElement, settings);
+          this._toggleButtonState(this._inputList, buttonElement);
         
           this._inputList.forEach((inputElement) => {
-            inputElement.addEventListener("input", () => {
+            this._inputElement.addEventListener("input", () => {
               this._checkInputValidity(inputElements);
-              toggleButtonState(inputList, buttonElement, );
+              this._toggleButtonState(this._inputList, buttonElement, );
             });
           });
         };
