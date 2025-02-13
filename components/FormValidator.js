@@ -6,6 +6,10 @@ class FormValidator {
         this._inputErrorClass = settings.inputErrorClass;
         this._inactiveButtonClass  = settings.inactiveButtonClass;
         this._formEl = formEl;
+        this._inputList = Array.from(
+            this._formEl.querySelectorAll(this._inputSelector)
+        );
+        this._setEventListeners();
     }
 
     _checkInputValidity(inputElement) {
@@ -18,6 +22,13 @@ class FormValidator {
           } else {
             hideInputError(inputElement);
           }
+    }
+
+    _toggleButtonState() {
+        const buttonElement = this._formEl.querySelector(this._submitButtonSelector);
+        console.log(buttonElement);
+        console.log(this._submitButtonSelector);
+
     }
 
     _setEventListeners() {
