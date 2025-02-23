@@ -16,8 +16,15 @@ const handleTodoCompletion = (todo, completed) => {
   todoCounter.updateCompleted(completed);
 };
 
+function handleTodoDelete(completed) {
+  if (completed) {
+    todoCounter.updateCompleted(false);
+  }
+  todoCounter.updateTotal(false);
+}
+
 const renderTodo = (todoData) => {
-  const todo = new Todo(todoData, "#todo-template", handleTodoCompletion);
+  const todo = new Todo(todoData, "#todo-template", handleTodoCompletion, handleTodoDelete);
   section.addItem(todo.getView());
 };
 
