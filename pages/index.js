@@ -11,59 +11,39 @@ const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoForm = document.forms["add-todo-form"];
-const todosList = document.querySelector(".todos__list");
-
-const addTodoPopup = new PopupWithForm({
-  popupSelector: "#add-todo-popup",
-  handleFormSubmit: (formData) => {
-    const id = uuidv4();
-    const values = { ...formData, id, completed: false };
-
-    renderTodo(values);
-
-    initialTodos.push(values);
-
-    todoCounter.updateTotal(true);
-    todoCounter.updateCompleted(initialTodos);
-    
-    newTodoValidator.resetValidation();
-  }
-});
 
 const handleTodoCompletion = (todo, completed) => {
-  todo.completed = completed;
   todoCounter.updateCompleted(completed);
-}
+};
 
-addTodoPopup.setEventListeners();
-
-const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template", handleTodoCompletion);
-  const todoElement = todo.getView();
-  return todoElement;
+const renderTodo = (todoData) => {
+  const todo = new Todo(todoData, "#todo-template", handleTodoCompletion);
+  section.addItem(todo.getView());
 };
 
 const section = new Section({
   items: initialTodos,
-  renderer: (item) => {
-    const todo = generateTodo(item);
-    section.addItem(todo);
-  },
-
+  renderer: renderTodo,
   containerSelector: ".todos__list",
 }); 
 
 section.renderItems();
 
-const renderTodo = (item) => {
-  const todo = generateTodo(item);
-  todosList.append(todo);
-};
-
-
-addTodoButton.addEventListener("click", () => {
-  addTodoPopup.open();
+const addTodoPopup = new PopupWithForm({
+  popupSelector: "#add-todo-popup",
+  handleFormSubmit: (formData) => {
+    const newTodo = { ...formData, id: uuidv4(), completed: false };
+    initialTodos.push(newTodo);
+    
+    renderTodo(newTodo);
+    todoCounter.updateTotal(true);
+    
+    newTodoValidator.resetValidation();
+  }
 });
+
+addTodoPopup.setEventListeners();
+addTodoButton.addEventListener("click", () => addTodoPopup.open());
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
