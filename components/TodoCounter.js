@@ -6,7 +6,7 @@ export default class TodoCounter {
       this._updateText();
     }
     
-      updateCompleted = (increment) => {
+    updateCompleted = (increment) => {
         if (increment) {
             this._completed += 1;
         } else {
